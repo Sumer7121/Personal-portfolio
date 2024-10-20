@@ -22,10 +22,15 @@ const MySkills = () => {
           <p className="font-playfair font-semibold text-4xl mb-5">
             MY <span className="text-red">SKILLS</span>
           </p>
-          <LineGradient width="w-1/3" />
+          <LineGradient width="w-1/3"/>
           <p className="mt-10 mb-7">
-            Aliquam, amet dui feugiat facilisi dui. Aliquam aliquet integer ut
-            fames odio in at.
+            <li className="text-right whitespace-nowrap">Programming Languages: C, Java, C#, Microsoft .NET , Python, node JS, Visual Basics, Flutter, Express JS, JS, React JS</li>
+            <li>Databases: SQL, MySQL, MongoDB, Firebase</li>
+            <li>Network Administration</li>
+            <li>Software Development</li>
+            <li>Mobile Application Development</li>
+            <li>Data Analysis and Database Management</li>
+            <li>Web Development: HTML, XML, CSS, Tailwind CSS, Figma</li>
           </p>
         </motion.div>
 
@@ -63,7 +68,7 @@ const MySkills = () => {
         >
           <div className="relative h-32">
             <div className="z-10">
-              <p className="font-playfair font-semibold text-5xl">01</p>
+              <p className="font-playfair font-semibold text-5xl">03+</p>
               <p className="font-playfair font-semibold text-3xl mt-3">
                 Experience
               </p>
@@ -71,9 +76,11 @@ const MySkills = () => {
             <div className="w-1/2 md:w-3/4 h-32 bg-blue absolute right-0 top-0 z-[-1]" />
           </div>
           <p className="mt-5">
-            A auctor pharetra hendrerit mattis amet etiam interdum platea. Est
-            morbi porttitor scelerisque fermentum, sagittis non egestas. Amet
-            odio sit sagittis,
+            <li>Total professional experience of 3+ years</li>
+            <li>software development for about 5+ years including personal and professional projects</li>
+            <li>2 years of experience in the field of Application Engineering and Marketing</li>
+            <li>Traveled to Vietnam for the development of a new product</li>
+            <li>1 year of experience working as a cashier in the dining hall while pursuing Master's degree</li>
           </p>
         </motion.div>
 
@@ -91,7 +98,6 @@ const MySkills = () => {
         >
           <div className="relative h-32">
             <div className="z-10">
-              <p className="font-playfair font-semibold text-5xl">02</p>
               <p className="font-playfair font-semibold text-3xl mt-3">
                 Innovative
               </p>
@@ -99,10 +105,9 @@ const MySkills = () => {
             <div className="w-1/2 md:w-3/4 h-32 bg-red absolute right-0 top-0 z-[-1]" />
           </div>
           <p className="mt-5">
-            Urna, eget pulvinar dolor cursus volutpat dictum odio. Nec ultricies
-            amet in in neque nibh tortor. Libero sed pretium justo nulla blandit
-            nulla amet habitant iaculis. Iaculis in congue vitae sollicitudin
-            faucibus a
+            I am always on the look out for new ideas challenging my capabilities
+            not being afraid of making a mistake, instead learning from them and
+            paving the way to unique ideas
           </p>
         </motion.div>
         {/* IMAGINATIVE */}
@@ -119,7 +124,6 @@ const MySkills = () => {
         >
           <div className="relative h-32">
             <div className="z-10">
-              <p className="font-playfair font-semibold text-5xl">03</p>
               <p className="font-playfair font-semibold text-3xl mt-3">
                 Imaginative
               </p>
@@ -127,10 +131,7 @@ const MySkills = () => {
             <div className="w-1/2 md:w-3/4 h-32 bg-yellow absolute right-0 top-0 z-[-1]" />
           </div>
           <p className="mt-5">
-            Accumsan eu fringilla nisi, eget. Vitae, eget ut id proin arcu in
-            curabitur. Lectus libero, egestas enim aliquam quis felis amet.
-            Sagittis, amet netus fringilla netus lobortis odio sed platea.
-            Bibendum.
+            Imagination is the key to being innovative, enabling me to envision innovative solutions and unique perspectives that challenge conventional thinking
           </p>
         </motion.div>
       </div>
