@@ -34,13 +34,22 @@
         <div class="stat"><div class="stathead">In interviews <span class="staticon" style="background:#f3edff;color:#8059bd">↗</span></div><strong id="interviewStat">0</strong><small>Screening or interview</small></div>
         <div class="stat"><div class="stathead">Offers <span class="staticon" style="background:#e8f7f0;color:#318369">✓</span></div><strong id="offerStat">0</strong><small>Offer stage</small></div>
       </div>
+      <section class="panel" style="margin-bottom:20px">
+        <div class="paneltop"><div><h2>Search LinkedIn people</h2><p class="subtitle" style="font-size:12px;margin:5px 0 0">Find profiles by tech stack and add a small set to this workspace.</p></div></div>
+        <div class="tabletools" style="justify-content:flex-start;flex-wrap:wrap">
+          <label class="search" style="max-width:520px"><span>⌕</span><input id="linkedinQuery" type="search" maxlength="160" placeholder="e.g. Python AWS Kubernetes" /></label>
+          <select id="linkedinLimit" class="filter" aria-label="Maximum profiles to import"><option value="5">Up to 5 profiles</option><option value="10">Up to 10 profiles</option></select>
+          <button class="btn primary" id="linkedinSearchBtn">Search and add</button>
+          <span id="linkedinSearchStatus" role="status" aria-live="polite" style="color:#737b8d;font-size:12px"></span>
+        </div>
+      </section>
       <section class="panel">
         <div class="paneltop"><h2>Candidate list</h2><div class="pills" id="stagePills"><button class="pill active" data-stage="All">All</button><button class="pill" data-stage="New">New</button><button class="pill" data-stage="Contacted">Contacted</button><button class="pill" data-stage="Screening">Screening</button><button class="pill" data-stage="Interview">Interview</button></div></div>
         <div class="tabletools"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search candidates, skills, or roles" /></label><select id="sort" class="filter" aria-label="Sort candidates"><option value="recent">Recently added</option><option value="name">Name A–Z</option><option value="fit">Best fit</option></select></div>
         <div class="tablewrap"><table><thead><tr><th>Candidate</th><th>Company</th><th>Location</th><th>Fit</th><th>Stage</th><th>Added</th><th></th></tr></thead><tbody id="candidateRows"></tbody></table><div class="empty" id="emptyState" hidden>No candidates yet. Add a record or import a CSV to get started.</div></div>
         <div class="footerline"><span id="countLabel">0 candidates</span><span>Saved on this device</span></div>
       </section>
-      <div class="notice"><span class="check">ⓘ</span><div><b>Use information you’re authorized to keep.</b> Add candidate details manually or import a file you’re permitted to use. This workspace does not visit or scrape LinkedIn. Open a profile link in LinkedIn to review it there.</div></div>
+      <div class="notice"><span class="check">ⓘ</span><div><b>Use information you’re authorized to keep.</b> LinkedIn search runs through the local connector on your computer. Your login session stays local, and imported candidate records are saved in this browser.</div></div>
     </section>
   </main>
 </div>
@@ -91,6 +100,22 @@
   const profileJsonInput=document.querySelector('#profileJsonInput');
   document.querySelector('#importProfileBtn').onclick=()=>profileJsonInput.click();
   profileJsonInput.onchange=async()=>{const file=profileJsonInput.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text()),items=Array.isArray(parsed)?parsed:[parsed];let added=0;for(const p of items){if(!p||typeof p!=='object'||!String(p.name||'').trim())continue;const experiences=Array.isArray(p.experiences)?p.experiences:[],education=Array.isArray(p.education)?p.education:(Array.isArray(p.educations)?p.educations:[]);const experienceNotes=experiences.map(x=>typeof x==='string'?x:[x.title,x.company,x.dates].filter(Boolean).join(' · ')).filter(Boolean).join('\n');const educationNotes=education.map(x=>typeof x==='string'?x:[x.school,x.degree,x.dates].filter(Boolean).join(' · ')).filter(Boolean).join('\n');const notes=[p.about,experienceNotes&&`Experience:\n${experienceNotes}`,educationNotes&&`Education:\n${educationNotes}`].filter(Boolean).join('\n\n');candidates.unshift({id:crypto.randomUUID(),name:String(p.name).trim(),title:String(p.headline||''),company:experiences[0]?.company||'',location:String(p.location||''),profile:safeLinkedInUrl(String(p.linkedin_url||'')),stage:'New',fit:0,skills:Array.isArray(p.skills)?p.skills.join(', '):String(p.skills||''),notes,addedAt:Date.now()});added++}if(!added)throw Error('No candidate with a name was found in that JSON file.');save();render();toast(`Imported ${added} profile${added===1?'':'s'}`)}catch(err){alert(err.message||'Could not read that JSON file.')}finally{profileJsonInput.value=''}};
+  const linkedinButton=document.querySelector('#linkedinSearchBtn'),linkedinStatus=document.querySelector('#linkedinSearchStatus');
+  document.querySelector('#linkedinQuery').addEventListener('keydown',e=>{if(e.key==='Enter')linkedinButton.click()});
+  linkedinButton.onclick=async()=>{
+    const stack=document.querySelector('#linkedinQuery').value.trim();
+    if(!stack){linkedinStatus.textContent='Enter one or more technologies to search.';return}
+    linkedinButton.disabled=true;linkedinStatus.textContent='Searching LinkedIn…';
+    try{
+      const response=await fetch('http://127.0.0.1:8765/api/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:stack,limit:+document.querySelector('#linkedinLimit').value})});
+      const data=await response.json();if(!response.ok)throw new Error(data.error||'The local connector could not complete the search.');
+      const profiles=Array.isArray(data.profiles)?data.profiles:[];let added=0,updated=0;
+      for(const p of profiles){if(!p||!String(p.name||'').trim())continue;const profile=safeLinkedInUrl(String(p.linkedin_url||''));if(!profile)continue;const experiences=Array.isArray(p.experiences)?p.experiences:[],education=Array.isArray(p.education)?p.education:(Array.isArray(p.educations)?p.educations:[]);const lines=experiences.map(x=>typeof x==='string'?x:[x.title,x.company,x.dates].filter(Boolean).join(' · ')).filter(Boolean);const school=education.map(x=>typeof x==='string'?x:[x.school,x.degree,x.dates].filter(Boolean).join(' · ')).filter(Boolean);const notes=[p.about,lines.length&&`Experience:\n${lines.join('\n')}`,school.length&&`Education:\n${school.join('\n')}`].filter(Boolean).join('\n\n');const existing=candidates.find(x=>x.profile===profile);if(existing){Object.assign(existing,{title:String(p.headline||existing.title||''),company:experiences[0]?.company||existing.company||'',location:String(p.location||existing.location||''),skills:Array.isArray(p.skills)?p.skills.join(', '):String(p.skills||existing.skills||''),notes:notes||existing.notes||''});updated++}else{candidates.unshift({id:crypto.randomUUID(),name:String(p.name).trim(),title:String(p.headline||''),company:experiences[0]?.company||'',location:String(p.location||''),profile,stage:'New',fit:0,skills:Array.isArray(p.skills)?p.skills.join(', '):String(p.skills||''),notes,addedAt:Date.now()});added++}}
+      save();render();linkedinStatus.textContent=`Added ${added}; refreshed ${updated}; found ${profiles.length}.`;
+      if(!profiles.length)linkedinStatus.textContent='No profiles were returned. Check that LinkedIn is signed in and the search results loaded.';
+    }catch(err){const message=String(err.message||err);linkedinStatus.textContent=message.includes('Failed to fetch')?'Start local_search_connector.py on this computer, then allow local network access in the browser.':message;}
+    finally{linkedinButton.disabled=false}
+  };
   function exportCSV(){const cols=['name','title','company','location','profile','stage','fit','skills','notes','addedAt'];const data=[cols.join(','),...candidates.map(x=>cols.map(k=>'"'+String(x[k]??'').replaceAll('"','""')+'"').join(','))].join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/csv'}));a.download='scoutboard-candidates.csv';a.click();URL.revokeObjectURL(a.href);toast('CSV exported')}
   document.querySelector('#exportNav').onclick=exportCSV;
   render();
