@@ -1,87 +1,42 @@
-import Navbar from "./scenes/Navbar";
-import Landing from "./scenes/Landing";
-import DotGroup from "./scenes/DotGroup";
-import MySkills from "./scenes/MySkills";
-import LineGradient from "./components/LineGradient";
-import Projects from "./scenes/Projects";
-import Contact from "./scenes/Contact";
-import Footer from "./scenes/Footer";
-import useMediaQuery from "./hooks/useMediaQuery";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
-  const [selectedPage, setSelectedPage] = useState("home");
-  const [isTopOfPage, setIsTopOfPage] = useState(true);
-  const isDesktop = useMediaQuery("(min-width: 1060px)");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY === 0) {
-        setIsTopOfPage(true);
-        setSelectedPage("home");
-      }
-      if (window.scrollY !== 0) setIsTopOfPage(false);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div className="app bg-deep-blue">
-      <Navbar
-        isTopOfPage={isTopOfPage}
-        selectedPage={selectedPage}
-        setSelectedPage={setSelectedPage}
-      />
-      <div className="w-5/6 mx-auto md:h-full">
-        {isDesktop && (
-          <DotGroup
-            selectedPage={selectedPage}
-            setSelectedPage={setSelectedPage}
-          />
-        )}
-        <motion.div
-          margin="0 0 -200px 0"
-          amount="all"
-          onViewportEnter={() => setSelectedPage("home")}
-        >
-          <Landing setSelectedPage={setSelectedPage} />
-        </motion.div>
-      </div>
-      <LineGradient />
-      <div className="w-5/6 mx-auto md:h-full ">
-        <motion.div
-          margin="0 0 -200px 0"
-          amount="all"
-          onViewportEnter={() => setSelectedPage("skills")}
-        >
-          <MySkills />
-        </motion.div>
-      </div>
-      <LineGradient />
-      <div className="w-5/6 mx-auto">
-        <motion.div
-          margin="0 0 -200px 0"
-          amount="all"
-          onViewportEnter={() => setSelectedPage("projects")}
-        >
-          <Projects />
-        </motion.div>
-      </div>
-      <LineGradient />
-      <div className="w-5/6 mx-auto md:h-full">
-        <motion.div
-          margin="0 0 -200px 0"
-          amount="all"
-          onViewportEnter={() => setSelectedPage("testimonials")}
-        >
-          <Contact />
-        </motion.div>
-      </div>
-      <Footer />
-    </div>
-  );
+const featured=[
+ {id:"01",name:"CrowBot",subtitle:"IMVU cloud music platform",type:"Cloud / Automation",desc:"Multi-room music bot architecture with independent queues, radio streaming, browser automation and cloud deployment workflows.",tech:["Python","Playwright","Docker","Render","Node.js"],link:"https://github.com/Sumer7121/CrowBot-IMVU-Music-Bot",accent:"violet",symbol:"◉",status:"In development"},
+ {id:"02",name:"Advanced RAG",subtitle:"LLM knowledge assistant",type:"AI / Machine Learning",desc:"Retrieval-augmented generation chatbot repository exploring document retrieval, context-aware answers and modular AI pipelines.",tech:["Python","LangChain","RAG","Vector Search","LLMs"],link:"https://github.com/Sumer7121/Advanced-RAG-LLM-Chatbot",accent:"mint",symbol:"✳",status:"In development"},
+ {id:"03",name:"Personal Portfolio",subtitle:"Developer experience",type:"Frontend / Design",desc:"Responsive portfolio with a curated project archive, modern interactions and continuous deployment from GitHub.",tech:["React","JavaScript","CSS","Render","GitHub"],link:"https://github.com/Sumer7121/Personal-portfolio",accent:"peach",symbol:"⌘",status:"Live"},
+ {id:"04",name:"WebAppDev",subtitle:"Web application experiments",type:"Web / Learning",desc:"Collection of frontend exercises including a weather app, insurance calculator, forms and profile interfaces.",tech:["JavaScript","HTML","CSS","Web Apps"],link:"https://github.com/Sumer7121/WebAppDev",accent:"blue",symbol:"▦",status:"Repository"},
+ {id:"05",name:"WebLab",subtitle:"Backend development lab",type:"Backend / Exploration",desc:"JavaScript application lab with application routing, configuration and middleware experiments.",tech:["JavaScript","Node.js","Middleware"],link:"https://github.com/Sumer7121/weblab",accent:"amber",symbol:"◇",status:"Repository"}
+];
+const caseStudies=[
+ {name:"MetaSigns",kind:"AI + Education",desc:"Unity-based ASL learning experience connecting interactive lessons with language-model and video workflows.",tech:["Unity","C#","LLaMA","FastAPI","ASL Video"]},
+ {name:"Drone Vision System",kind:"Computer Vision",desc:"Jetson Nano-powered object and human detection work with gimbal and thermal-camera integration.",tech:["Python","Jetson Nano","Computer Vision","Embedded AI"]},
+ {name:"Cloud Data Pipelines",kind:"Data Engineering",desc:"ETL/ELT, validation and cloud processing workflows for analytics and operational data.",tech:["Python","SQL","AWS","PySpark","Kafka"]},
+ {name:"Glass & Sass Arts",kind:"Full-stack",desc:"Art gallery web application with collection browsing, administration and cloud-hosted backend.",tech:["React","Vite","MongoDB","Render"]}
+];
+const roadmap=[
+ {name:"Cookbook Social",stage:"Planning & building",desc:"A cooking-first social platform with personal kitchen inventory, recipe discovery, allergy filters and an animated recipe roulette.",tech:["React Native","Expo","TypeScript","AI Recipes","Auth","iOS / Android"]},
+ {name:"Cloud-Native AI Workspace",stage:"Concept",desc:"A unified interface for deploying, monitoring and exploring AI-backed applications and data workflows.",tech:["AWS","Docker","Kubernetes","Python","OpenTelemetry"]},
+ {name:"CrowBot Cloud Expansion",stage:"Planned enhancements",desc:"Further improvements to room management, hosted user access, queue isolation and operational observability.",tech:["Python","Playwright","Render","Redis","Observability"]}
+];
+const stack=[["Cloud & Infrastructure","AWS · Terraform · Docker · Kubernetes · EKS · Lambda · EC2 · S3 · IAM"],["AI & Intelligent Systems","Python · LLMs · RAG · LangChain · Pinecone · FAISS · PyTorch"],["Data & Streaming","SQL · PostgreSQL · Snowflake · Databricks · Spark · Kafka · Airflow"],["Application Engineering","React · Node.js · TypeScript · REST APIs · FastAPI · MongoDB · Playwright"],["Delivery & Observability","GitHub Actions · CI/CD · CloudWatch · ELK · OpenTelemetry · Jest"]];
+const Pill=({children})=><span className="tech-pill">{children}</span>;
+function App(){
+ const [filter,setFilter]=useState("All");
+ const filters=["All","Cloud / Automation","AI / Machine Learning","Frontend / Design","Web / Learning","Backend / Exploration"];
+ const shown=filter==="All"?featured:featured.filter(p=>p.type===filter);
+ return <div className="portfolio-shell">
+  <div className="ambient ambient-one"/><div className="ambient ambient-two"/>
+  <header className="site-header"><a href="#home" className="brand"><span className="brand-mark">S<span className="brand-dot">.</span></span><span>SUMER / DEV</span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#roadmap">What's next</a><a href="#contact" className="nav-contact">Let's talk <span>↗</span></a></nav></header>
+  <main>
+   <section id="home" className="hero wrap"><div className="hero-content"><div className="eyebrow"><span className="pulse-dot"/> AVAILABLE FOR ENGINEERING OPPORTUNITIES</div><h1>Building what<br/><span className="headline-outline">comes next</span><span className="headline-star">✳</span></h1><p className="hero-description">I'm <strong>Mohammed Sumer Khan</strong> — a Cloud, Data & AI Engineer turning complex ideas into reliable, thoughtful digital products.</p><div className="hero-actions"><a className="button-primary" href="#work">Explore my work <span>↗</span></a><a className="button-text" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a></div><div className="hero-meta"><div><strong>Cloud + AI</strong><span>Engineering focus</span></div><div><strong>5 public</strong><span>GitHub repositories</span></div><div><strong>Always building</strong><span>Experiments & products</span></div></div></div><div className="hero-visual"><div className="orb-ring ring-one"/><div className="orb-ring ring-two"/><div className="orb-core"><span>SK</span><small>ENGINEER / CREATOR</small></div><div className="float-label float-top">◈ &nbsp; CLOUD SYSTEMS</div><div className="float-label float-bottom">✳ &nbsp; AI-POWERED PRODUCTS</div></div></section>
+   <div className="marquee"><div>ENGINEERING <span>✳</span> ARTIFICIAL INTELLIGENCE <span>✳</span> CLOUD INFRASTRUCTURE <span>✳</span> PRODUCT DESIGN <span>✳</span> ENGINEERING <span>✳</span> ARTIFICIAL INTELLIGENCE <span>✳</span></div></div>
+   <section id="work" className="section wrap"><div className="section-heading"><div><span className="section-kicker">01 / SELECTED WORK</span><h2>Projects with <em>purpose.</em></h2><p>Real repositories, practical experiments, and software I'm actively evolving.</p></div><a className="inline-link" href="https://github.com/Sumer7121?tab=repositories" target="_blank" rel="noopener noreferrer">All GitHub repositories ↗</a></div><div className="filters" aria-label="Filter projects">{filters.map(f=><button type="button" key={f} className={filter===f?"filter active":"filter"} onClick={()=>setFilter(f)}>{f==="All"?"All projects":f.split(" / ")[0]}</button>)}</div><div className="project-grid">{shown.map((p,i)=><article className={`project-card ${p.accent}`} key={p.id}><div className="project-card-top"><span>{p.id} / {p.type.toUpperCase()}</span><span className="status-pill">{p.status}</span></div><div className="project-art" aria-hidden="true"><div className="art-orbit"/><span>{p.symbol}</span><div className="art-grid"/></div><div className="project-body"><h3>{p.name}</h3><p className="project-subtitle">{p.subtitle}</p><p className="project-description">{p.desc}</p><div className="pill-list">{p.tech.map(t=><Pill key={t}>{t}</Pill>)}</div><a className="project-link" href={p.link} target="_blank" rel="noopener noreferrer">View source on GitHub <span>↗</span></a></div></article>)}</div></section>
+   <section className="section wrap compact"><div className="section-heading"><div><span className="section-kicker">02 / ADDITIONAL EXPERIENCE</span><h2>Beyond the <em>repositories.</em></h2><p>Selected work and projects from my wider engineering background.</p></div></div><div className="case-grid">{caseStudies.map(c=><article className="case-card" key={c.name}><span className="case-kind">{c.kind}</span><h3>{c.name}</h3><p>{c.desc}</p><div className="pill-list">{c.tech.map(t=><Pill key={t}>{t}</Pill>)}</div></article>)}</div></section>
+   <section id="about" className="section about-section"><div className="wrap about-grid"><div><span className="section-kicker">03 / ABOUT ME</span><h2>Engineering the<br/><em>whole picture.</em></h2><p className="about-copy">My work spans cloud infrastructure, AI systems, data engineering and full-stack applications. I enjoy the intersection of dependable backend architecture and interfaces that feel effortless to use.</p><a className="inline-link" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">Explore my engineering work ↗</a></div><div className="stack-list">{stack.map(([name,items],i)=><div className="stack-row" key={name}><span className="stack-index">0{i+1}</span><div><h3>{name}</h3><p>{items}</p></div><span className="stack-arrow">↗</span></div>)}</div></div></section>
+   <section id="roadmap" className="section wrap"><div className="section-heading"><div><span className="section-kicker">04 / ON THE HORIZON</span><h2>What's <em>next?</em></h2><p>Ideas in motion. These are planned or in-progress initiatives, not completed releases.</p></div></div><div className="roadmap-grid">{roadmap.map((p,i)=><article className="roadmap-card" key={p.name}><div className="roadmap-top"><span>0{i+1}</span><span className="roadmap-stage">{p.stage}</span></div><div className="roadmap-icon">↗</div><h3>{p.name}</h3><p>{p.desc}</p><div className="pill-list">{p.tech.map(t=><Pill key={t}>{t}</Pill>)}</div></article>)}</div></section>
+   <section id="contact" className="contact-section"><div className="wrap contact-inner"><span className="section-kicker">05 / LET'S CONNECT</span><h2>Have something<br/><em>interesting in mind?</em></h2><p>I'm interested in cloud engineering, AI platforms, data systems and ambitious software ideas.</p><div className="contact-actions"><a className="button-primary" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">Find me on GitHub ↗</a><a className="button-outline" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></section>
+  </main><footer className="site-footer wrap"><span>© {new Date().getFullYear()} Mohammed Sumer Khan</span><span>Designed & built with curiosity ✳</span><a href="#home">Back to top ↑</a></footer>
+ </div>
 }
-
 export default App;
