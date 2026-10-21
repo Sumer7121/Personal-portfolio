@@ -9,6 +9,7 @@ const featured=[
  {id:"05",name:"WebLab",subtitle:"Backend development lab",type:"Backend / Exploration",desc:"JavaScript application lab with application routing, configuration and middleware experiments.",tech:["JavaScript","Node.js","Middleware"],link:"https://github.com/Sumer7121/weblab",accent:"amber",symbol:"◇",status:"Repository"}
 ];
 const caseStudies=[
+ {name:"BESS Battery Performance Analytics & ML",kind:"Energy Analytics / Machine Learning",desc:"Battery energy storage capacity-test analysis using measured charge/discharge readings, round-trip efficiency (RTE), warranty compliance checks, anomaly flags, degradation indicators, and linear-regression prediction. Exports operational KPI reports and model artifacts. Seasonal analysis uses simulated dates and is illustrative only.",tech:["Python","Pandas","NumPy","Scikit-learn","SciPy","Matplotlib","Parquet","Excel"]},
  {name:"MetaSigns",kind:"AI + Education",desc:"Unity-based ASL learning experience connecting interactive lessons with language-model and video workflows.",tech:["Unity","C#","LLaMA","FastAPI","ASL Video"]},
  {name:"Drone Vision System",kind:"Computer Vision",desc:"Jetson Nano-powered object and human detection work with gimbal and thermal-camera integration.",tech:["Python","Jetson Nano","Computer Vision","Embedded AI"]},
  {name:"Cloud Data Pipelines",kind:"Data Engineering",desc:"ETL/ELT, validation and cloud processing workflows for analytics and operational data.",tech:["Python","SQL","AWS","PySpark","Kafka"]},
