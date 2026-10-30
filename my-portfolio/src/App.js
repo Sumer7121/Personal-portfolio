@@ -1,53 +1,191 @@
 import React, { useState } from "react";
 import "./App.css";
-
-const featured=[
- {id:"11",name:"Cookbook · Recipe Tales",subtitle:"AI-assisted recipe discovery",type:"AI / Machine Learning",desc:"A web and mobile cooking platform in development, with recipe discovery, kitchen inventory, saved recipes and AI-assisted recipe workflows.",tech:["React","React Native","Expo","TypeScript","AI Workflows"],accent:"amber",symbol:"✺",status:"In development",sourceNote:"Source repository is private"},
- {id:"12",name:"Recruiting Profile Explorer",subtitle:"Profile review and recruiting workflows",type:"Web / Learning",desc:"A browser-based recruiting interface with companion Python tools for authenticated profile capture and structured data workflows.",tech:["JavaScript","HTML","CSS","Python","Playwright"],link:"https://github.com/Sumer7121/Personal-portfolio/tree/main/recruiter-tool",linkLabel:"View project on GitHub",accent:"blue",symbol:"⌕",status:"Prototype"},
- {id:"06",name:"BESS Battery Analytics",subtitle:"Energy storage performance & ML",type:"AI / Machine Learning",desc:"Battery capacity testing with RTE calculations, warranty compliance, anomaly detection, regression modeling and KPI reporting.",tech:["Python","Pandas","Scikit-learn","SciPy","Matplotlib"],link:"https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/bess-battery-analytics",accent:"mint",symbol:"⚡",status:"Case study",linkLabel:"Read case study on GitHub"},
- {id:"07",name:"MetaSigns",subtitle:"AI-assisted Unity learning",type:"AI / Machine Learning",desc:"Interactive K–12 learning with Unity, C#, concept-word selection, LLaMA integration and ASL video feedback.",tech:["Unity","C#","Python","LLaMA","FastAPI"],link:"https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/metasigns-asl-aspire",accent:"violet",symbol:"✦",status:"Case study",linkLabel:"Read case study on GitHub"},
- {id:"08",name:"Hybrid Cloud Automation",subtitle:"AWS + Azure infrastructure",type:"Cloud / Automation",desc:"Modular Terraform and Ansible infrastructure automation, cloud governance, backup/recovery and monitoring.",tech:["AWS","Azure","Terraform","Ansible","GitHub Actions"],link:"https://github.com/Sumer7121/Personal-portfolio",accent:"blue",symbol:"☁",status:"Resume project",linkLabel:"View portfolio repository"},
- {id:"09",name:"Kubernetes CI/CD",subtitle:"Microservices delivery pipelines",type:"Cloud / Automation",desc:"Jenkins and GitHub Actions pipelines with Helm-based Kubernetes deployments, quality gates and rollback workflows.",tech:["Kubernetes","EKS","AKS","Helm","Jenkins","SonarQube"],link:"https://github.com/Sumer7121/Personal-portfolio",accent:"amber",symbol:"⬡",status:"Resume project",linkLabel:"View portfolio repository"},
- {id:"01",name:"CrowBot",subtitle:"IMVU cloud music platform",type:"Cloud / Automation",desc:"Multi-room music bot architecture with independent queues, radio streaming, browser automation and cloud deployment workflows.",tech:["Python","Playwright","Docker","Render","Node.js"],link:"https://github.com/Sumer7121/CrowBot-IMVU-Music-Bot",accent:"violet",symbol:"◉",status:"In development"},
- {id:"02",name:"Advanced RAG",subtitle:"LLM knowledge assistant",type:"AI / Machine Learning",desc:"Local document Q&A with PDF, DOCX and TXT ingestion, Sentence Transformer embeddings, FAISS retrieval, Ollama answers and retrieved source excerpts.",tech:["Python","FastAPI","Streamlit","FAISS","Sentence Transformers","Ollama"],link:"https://github.com/Sumer7121/Advanced-RAG-LLM-Chatbot",accent:"mint",symbol:"✳",status:"MVP"},
- {id:"03",name:"Personal Portfolio",subtitle:"Developer experience",type:"Frontend / Design",desc:"Responsive portfolio with a curated project archive, modern interactions and continuous deployment from GitHub.",tech:["React","JavaScript","CSS","Render","GitHub"],link:"https://github.com/Sumer7121/Personal-portfolio",accent:"peach",symbol:"⌘",status:"Live"},
- {id:"04",name:"WebAppDev",subtitle:"Web application experiments",type:"Web / Learning",desc:"Collection of frontend exercises including a weather app, insurance calculator, forms and profile interfaces.",tech:["JavaScript","HTML","CSS","Web Apps"],link:"https://github.com/Sumer7121/WebAppDev",accent:"blue",symbol:"▦",status:"Repository"},
- {id:"05",name:"WebLab",subtitle:"Backend development lab",type:"Backend / Exploration",desc:"JavaScript application lab with application routing, configuration and middleware experiments.",tech:["JavaScript","Node.js","Middleware"],link:"https://github.com/Sumer7121/weblab",accent:"amber",symbol:"◇",status:"Repository"},
- {id:"10",name:"Glass & Sass Arts",subtitle:"Handcrafted art storefront",type:"Frontend / Design",desc:"A storefront and admin system for fused-glass, woodturning and mixed-media pieces, backed by a MongoDB API.",tech:["React","Vite","Express","MongoDB","Cloudinary","Stripe"],link:"https://github.com/Sumer7121/GlassAndSassArts",accent:"peach",symbol:"✧",status:"Preparing to launch"}
-];
-const caseStudies=[
- {name:"Drone Vision System",kind:"Computer Vision",desc:"Jetson Nano-based object detection and gimbal integration.",tech:["Python","Jetson Nano","Computer Vision"]},
- {name:"Cloud Data Pipelines",kind:"Data Engineering",desc:"ETL, validation and cloud data workflows.",tech:["Python","SQL","AWS","PySpark"]},
-
+const projects=[
+  {
+    "id": "02",
+    "name": "Advanced RAG",
+    "subtitle": "LLM knowledge assistant",
+    "type": "AI / Machine Learning",
+    "desc": "Local document Q&A with PDF, DOCX and TXT ingestion, Sentence Transformer embeddings, FAISS retrieval, Ollama answers and retrieved source excerpts.",
+    "tech": [
+      "Python",
+      "FastAPI",
+      "Streamlit",
+      "FAISS",
+      "Sentence Transformers",
+      "Ollama"
+    ],
+    "link": "https://github.com/Sumer7121/Advanced-RAG-LLM-Chatbot",
+    "accent": "mint",
+    "symbol": "✳",
+    "status": "MVP"
+  },
+  {
+    "id": "01",
+    "name": "CrowBot",
+    "subtitle": "IMVU cloud music platform",
+    "type": "Cloud / Automation",
+    "desc": "Multi-room music bot architecture with independent queues, radio streaming, browser automation and cloud deployment workflows.",
+    "tech": [
+      "Python",
+      "Playwright",
+      "Docker",
+      "Render",
+      "Node.js"
+    ],
+    "link": "https://github.com/Sumer7121/CrowBot-IMVU-Music-Bot",
+    "accent": "violet",
+    "symbol": "◉",
+    "status": "In development"
+  },
+  {
+    "id": "10",
+    "name": "Glass & Sass Arts",
+    "subtitle": "Handcrafted art storefront",
+    "type": "Frontend / Design",
+    "desc": "A storefront and admin system for fused-glass, woodturning and mixed-media pieces, backed by a MongoDB API.",
+    "tech": [
+      "React",
+      "Vite",
+      "Express",
+      "MongoDB",
+      "Cloudinary",
+      "Stripe"
+    ],
+    "link": "https://github.com/Sumer7121/GlassAndSassArts",
+    "accent": "peach",
+    "symbol": "✧",
+    "status": "Preparing to launch"
+  },
+  {
+    "id": "12",
+    "name": "Recruiting Profile Explorer",
+    "subtitle": "Profile review and recruiting workflows",
+    "type": "Web / Learning",
+    "desc": "A browser-based recruiting interface with companion Python tools for authenticated profile capture and structured data workflows.",
+    "tech": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Python",
+      "Playwright"
+    ],
+    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/recruiter-tool",
+    "linkLabel": "View project on GitHub",
+    "accent": "blue",
+    "symbol": "⌕",
+    "status": "Prototype"
+  },
+  {
+    "id": "06",
+    "name": "BESS Battery Analytics",
+    "subtitle": "Energy storage performance & ML",
+    "type": "AI / Machine Learning",
+    "desc": "Battery capacity testing with RTE calculations, warranty compliance, anomaly detection, regression modeling and KPI reporting.",
+    "tech": [
+      "Python",
+      "Pandas",
+      "Scikit-learn",
+      "SciPy",
+      "Matplotlib"
+    ],
+    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/bess-battery-analytics",
+    "accent": "mint",
+    "symbol": "⚡",
+    "status": "Case study",
+    "linkLabel": "Read case study on GitHub"
+  },
+  {
+    "id": "07",
+    "name": "MetaSigns",
+    "subtitle": "AI-assisted Unity learning",
+    "type": "AI / Machine Learning",
+    "desc": "Interactive K–12 learning with Unity, C#, concept-word selection, LLaMA integration and ASL video feedback.",
+    "tech": [
+      "Unity",
+      "C#",
+      "Python",
+      "LLaMA",
+      "FastAPI"
+    ],
+    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/metasigns-asl-aspire",
+    "accent": "violet",
+    "symbol": "✦",
+    "status": "Case study",
+    "linkLabel": "Read case study on GitHub"
+  },
+  {
+    "id": "03",
+    "name": "Personal Portfolio",
+    "subtitle": "Developer experience",
+    "type": "Frontend / Design",
+    "desc": "Responsive portfolio with a curated project archive, modern interactions and continuous deployment from GitHub.",
+    "tech": [
+      "React",
+      "JavaScript",
+      "CSS",
+      "Render",
+      "GitHub"
+    ],
+    "link": "https://github.com/Sumer7121/Personal-portfolio",
+    "accent": "peach",
+    "symbol": "⌘",
+    "status": "Live"
+  },
+  {
+    "id": "04",
+    "name": "WebAppDev",
+    "subtitle": "Web application experiments",
+    "type": "Web / Learning",
+    "desc": "Collection of frontend exercises including a weather app, insurance calculator, forms and profile interfaces.",
+    "tech": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Web Apps"
+    ],
+    "link": "https://github.com/Sumer7121/WebAppDev",
+    "accent": "blue",
+    "symbol": "▦",
+    "status": "Repository"
+  },
+  {
+    "id": "05",
+    "name": "WebLab",
+    "subtitle": "Backend development lab",
+    "type": "Backend / Exploration",
+    "desc": "JavaScript application lab with application routing, configuration and middleware experiments.",
+    "tech": [
+      "JavaScript",
+      "Node.js",
+      "Middleware"
+    ],
+    "link": "https://github.com/Sumer7121/weblab",
+    "accent": "amber",
+    "symbol": "◇",
+    "status": "Repository"
+  }
 ];
 const experience=[
  {role:"Cloud Infrastructure Engineer",company:"Adobe",period:"Aug 2024 – Present",detail:"AWS and Azure hybrid infrastructure, Terraform and Ansible automation, IAM governance, Kubernetes deployments and monitoring."},
  {role:"DevOps / Infrastructure Engineer",company:"IBM",period:"Jun 2021 – Dec 2022",detail:"Infrastructure-as-code, Jenkins CI/CD, Linux and Windows operations, and production incident response."},
  {role:"Jr. Cloud Engineer",company:"Amazon Web Services (AWS)",period:"Jun 2020 – May 2021",detail:"EC2, VPC, S3, IAM, Terraform automation, Docker, EKS and CloudWatch."}
 ];
-const roadmap=[
- {name:"Cookbook Social",stage:"Planning & building",desc:"A cooking-first social platform with personal kitchen inventory, recipe discovery, allergy filters and an animated recipe roulette.",tech:["React Native","Expo","TypeScript","AI Recipes","Auth","iOS / Android"]},
- {name:"Cloud-Native AI Workspace",stage:"Concept",desc:"A unified interface for deploying, monitoring and exploring AI-backed applications and data workflows.",tech:["AWS","Docker","Kubernetes","Python","OpenTelemetry"]},
- {name:"CrowBot Cloud Expansion",stage:"Planned enhancements",desc:"Further improvements to room management, hosted user access, queue isolation and operational observability.",tech:["Python","Playwright","Render","Redis","Observability"]}
-];
-const stack=[["Cloud & Infrastructure","AWS · Azure · Terraform · Ansible · CloudFormation · Docker · Kubernetes · EKS · AKS · Helm"],["AI & Intelligent Systems","Python · LLMs · RAG · LangChain · LangGraph · LlamaIndex · Azure OpenAI · Hugging Face · Pinecone · FAISS · ChatGPT · Claude"],["Data & Streaming","SQL · PostgreSQL · Snowflake · Databricks · Spark · Kafka · Airflow"],["Application Engineering","React · Node.js · TypeScript · REST APIs · FastAPI · MongoDB · Playwright"],["Delivery & Observability","Azure DevOps · Jenkins · GitHub Actions · GitLab CI · CloudWatch · Azure Monitor · AppDynamics · Datadog · Prometheus · Grafana · ELK"]];
-const Pill=({children})=><span className="tech-pill">{children}</span>;
+const categories=["All","AI","Cloud","Web"];
+const category=p=>p.type.startsWith("AI")?"AI":p.type.startsWith("Cloud")?"Cloud":"Web";
 function App(){
  const [filter,setFilter]=useState("All");
- const filters=["All","Cloud / Automation","AI / Machine Learning","Frontend / Design","Web / Learning","Backend / Exploration"];
- const shown=filter==="All"?featured:featured.filter(p=>p.type===filter);
- return <div className="portfolio-shell">
-  <div className="ambient ambient-one"/><div className="ambient ambient-two"/>
-  <header className="site-header"><a href="#home" className="brand"><span className="brand-mark">S<span className="brand-dot">.</span></span><span>SUMER / DEV</span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#roadmap">What's next</a><a href="#contact" className="nav-contact">Let's talk <span>↗</span></a></nav></header>
+ const shown=projects.filter(p=>filter==="All"||category(p)===filter);
+ return <div className="site" id="home">
+  <header className="header"><a className="wordmark" href="#home">Sumer Khan<span>Tampa, Florida</span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="mailto:sumerkhan95@gmail.com">Contact</a></nav></header>
   <main>
-   <section id="home" className="hero wrap"><div className="hero-content"><div className="eyebrow"><span className="pulse-dot"/> CLOUD ENGINEERING · GENERATIVE AI · DATA</div><h1>Building what<br/><span className="headline-outline">comes next</span><span className="headline-star">✳</span></h1><p className="hero-description">I'm <strong>Mohammed Sumer Khan</strong> — an engineer working across cloud infrastructure, data systems and GenAI applications. I build with Python, AWS, Azure, LLMs, RAG and modern application frameworks.</p><div className="hero-actions"><a className="button-primary" href="#work">Explore my work <span>↗</span></a><a className="button-text" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a></div><div className="hero-meta"><div><strong>Cloud + AI</strong><span>Engineering focus</span></div><div><strong>{featured.length} featured</strong><span>Projects & case studies</span></div><div><strong>Always building</strong><span>Experiments & products</span></div></div></div><div className="hero-visual"><div className="orb-ring ring-one"/><div className="orb-ring ring-two"/><div className="orb-core"><span>SK</span><small>ENGINEER / CREATOR</small></div><div className="float-label float-top">◈ &nbsp; CLOUD SYSTEMS</div><div className="float-label float-bottom">✳ &nbsp; AI-POWERED PRODUCTS</div></div></section>
-   <div className="marquee"><div>ENGINEERING <span>✳</span> ARTIFICIAL INTELLIGENCE <span>✳</span> CLOUD INFRASTRUCTURE <span>✳</span> PRODUCT DESIGN <span>✳</span> ENGINEERING <span>✳</span> ARTIFICIAL INTELLIGENCE <span>✳</span></div></div>
-   <section id="work" className="section wrap"><div className="section-heading"><div><span className="section-kicker">01 / SELECTED WORK</span><h2>Projects with <em>purpose.</em></h2><p>Real repositories, practical experiments, and software I'm actively evolving.</p></div><a className="inline-link" href="https://github.com/Sumer7121?tab=repositories" target="_blank" rel="noopener noreferrer">All GitHub repositories ↗</a></div><div className="filters" aria-label="Filter projects">{filters.map(f=><button type="button" key={f} className={filter===f?"filter active":"filter"} onClick={()=>setFilter(f)}>{f==="All"?"All projects":f.split(" / ")[0]}</button>)}</div><div className="project-grid">{shown.map((p,i)=><article className={`project-card ${p.accent}`} key={p.id}><div className="project-card-top"><span>{p.id} / {p.type.toUpperCase()}</span><span className="status-pill">{p.status}</span></div><div className="project-art" aria-hidden="true"><div className="art-orbit"/><span>{p.symbol}</span><div className="art-grid"/></div><div className="project-body"><h3>{p.name}</h3><p className="project-subtitle">{p.subtitle}</p><p className="project-description">{p.desc}</p><div className="pill-list">{p.tech.map(t=><Pill key={t}>{t}</Pill>)}</div>{p.link ? <a className="project-link" href={p.link} target="_blank" rel="noopener noreferrer">{p.linkLabel || "View source on GitHub"} <span>↗</span></a> : <p className="project-link">{p.sourceNote}</p>}</div></article>)}</div></section>
-   <section id="experience" className="section wrap compact"><div className="section-heading"><div><span className="section-kicker">02 / PROFESSIONAL EXPERIENCE</span><h2>Where I've <em>worked.</em></h2><p>Cloud infrastructure, automation and production engineering experience.</p></div></div><div className="case-grid">{experience.map(e=><article className="case-card" key={e.company}><span className="case-kind">{e.period}</span><h3>{e.role}</h3><p><strong>{e.company}</strong></p><p>{e.detail}</p></article>)}</div></section><section className="section wrap compact"><div className="section-heading"><div><span className="section-kicker">03 / ADDITIONAL PROJECTS</span><h2>Beyond the <em>repositories.</em></h2><p>Selected work and projects from my wider engineering background.</p></div></div><div className="case-grid">{caseStudies.map(c=><article className="case-card" key={c.name}><span className="case-kind">{c.kind}</span><h3>{c.name}</h3><p>{c.desc}</p><div className="pill-list">{c.tech.map(t=><Pill key={t}>{t}</Pill>)}</div>{c.link&&<a className="project-link" href={c.link} target="_blank" rel="noopener noreferrer">Read technical case study <span>↗</span></a>}</article>)}</div></section>
-   <section id="about" className="section about-section"><div className="wrap about-grid"><div><span className="section-kicker">03 / ABOUT ME</span><h2>Engineering the<br/><em>whole picture.</em></h2><p className="about-copy">My work spans cloud infrastructure, AI systems, data engineering and full-stack applications. I enjoy the intersection of dependable backend architecture and interfaces that feel effortless to use.</p><a className="inline-link" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">Explore my engineering work ↗</a></div><div className="stack-list">{stack.map(([name,items],i)=><div className="stack-row" key={name}><span className="stack-index">0{i+1}</span><div><h3>{name}</h3><p>{items}</p></div><span className="stack-arrow">↗</span></div>)}</div></div></section>
-   <section id="roadmap" className="section wrap"><div className="section-heading"><div><span className="section-kicker">04 / ON THE HORIZON</span><h2>What's <em>next?</em></h2><p>Ideas in motion. These are planned or in-progress initiatives, not completed releases.</p></div></div><div className="roadmap-grid">{roadmap.map((p,i)=><article className="roadmap-card" key={p.name}><div className="roadmap-top"><span>0{i+1}</span><span className="roadmap-stage">{p.stage}</span></div><div className="roadmap-icon">↗</div><h3>{p.name}</h3><p>{p.desc}</p><div className="pill-list">{p.tech.map(t=><Pill key={t}>{t}</Pill>)}</div></article>)}</div></section>
-   <section id="contact" className="contact-section"><div className="wrap contact-inner"><span className="section-kicker">05 / LET'S CONNECT</span><h2>Have something<br/><em>interesting in mind?</em></h2><p>I'm interested in cloud engineering, AI platforms, data systems and ambitious software ideas.</p><div className="contact-actions"><a className="button-primary" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">Find me on GitHub ↗</a><a className="button-outline" href="https://www.linkedin.com/in/sumer-md" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></section>
-  </main><footer className="site-footer wrap"><span>© {new Date().getFullYear()} Mohammed Sumer Khan</span><span>Designed & built with curiosity ✳</span><a href="#home">Back to top ↑</a></footer>
- </div>
+   <section className="intro"><p className="eyebrow">Cloud engineering / AI applications</p><h1>Mohammed<br/>Sumer Khan<span>.</span></h1><div className="intro-bottom"><p>I work on cloud infrastructure, automation and AI applications. My projects range from document search and learning tools to software for music and recipe discovery.</p><a className="text-link" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a></div></section>
+   <section className="work section" id="work"><div className="section-head"><h2>Selected work</h2><div className="filters" role="group" aria-label="Filter projects">{categories.map(c=><button key={c} type="button" aria-pressed={filter===c} onClick={()=>setFilter(c)}>{c}</button>)}</div></div>
+   <div className="projects">{shown.map((p,i)=><a className="project" href={p.link} key={p.id} target="_blank" rel="noopener noreferrer" aria-label={p.name+" — "+(p.status==="Case study"?"GitHub case study":"GitHub repository")}><div className="project-top"><span>{category(p)} / {p.status==="Case study"?"Case study":"Code"}</span><span aria-hidden="true">↗</span></div><h3>{p.name}</h3><p>{p.desc}</p><div className="tech">{p.tech.slice(0,5).join(" · ")}</div><span className="source-label">{p.status==="Case study"?"Read case study on GitHub":"View project on GitHub"}</span></a>)}</div>
+   <aside className="current-project"><span>Also building</span><div><h3>Cookbook / Recipe Tales</h3><p>Recipe discovery, kitchen inventory and AI-assisted cooking workflows for web and mobile. The source repository is private.</p></div></aside></section>
+   <section className="section" id="experience"><div className="section-head"><h2>Experience</h2></div><div className="experience">{experience.map(e=><article className="experience-row" key={e.company}><div><h3>{e.company}</h3><span>{e.period}</span></div><div><h4>{e.role}</h4><p>{e.detail}</p></div></article>)}</div></section>
+   <section className="section about" id="about"><h2>About</h2><div><p>I’m based in Tampa and work across AWS and Azure infrastructure, Python automation, data systems and LLM applications. I like building software that solves a specific problem and is straightforward to operate.</p><dl><div><dt>Cloud</dt><dd>AWS, Azure, Terraform, Ansible, Docker, Kubernetes</dd></div><div><dt>AI</dt><dd>Python, RAG, LangChain, FastAPI, FAISS, Hugging Face, Ollama</dd></div><div><dt>Applications</dt><dd>React, JavaScript, TypeScript, Node.js, SQL</dd></div><div><dt>Delivery</dt><dd>GitHub Actions, Azure DevOps, Jenkins, CloudWatch, Grafana</dd></div></dl></div></section>
+  </main><footer><div><p>Get in touch</p><a href="mailto:sumerkhan95@gmail.com">sumerkhan95@gmail.com</a></div><a className="text-link" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span>© {new Date().getFullYear()} Mohammed Sumer Khan</span></footer>
+ </div>;
 }
 export default App;
