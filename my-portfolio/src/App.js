@@ -1,163 +1,158 @@
 import React, { useState } from "react";
 import "./App.css";
-const projects=[
+
+const projects = [
   {
-    "id": "01",
-    "name": "CrowBot",
-    "subtitle": "Cloud-hosted automation and streaming",
-    "type": "Cloud / Automation",
-    "desc": "Python-based multi-room music automation with browser workflows, Docker-based cloud services, streaming integrations and operational troubleshooting.",
-    "tech": ["Python", "Docker", "Render", "Playwright", "Cloud deployment"],
-    "link": "https://github.com/Sumer7121/CrowBot-IMVU-Music-Bot",
-    "accent": "violet",
-    "symbol": "◉",
-    "status": "In development"
+    id: "01",
+    name: "Cloud Portfolio CI/CD",
+    subtitle: "GitHub to Render deployment workflow",
+    type: "Cloud / Deployment",
+    desc: "This React portfolio is built from a GitHub repository and deployed on Render through an automated build and release workflow.",
+    tech: ["GitHub", "Render", "CI/CD", "React", "JavaScript"],
+    link: "https://github.com/Sumer7121/Personal-portfolio",
+    status: "Live"
   },
   {
-    "id": "03",
-    "name": "Portfolio CI/CD & Cloud Hosting",
-    "subtitle": "GitHub to Render deployment workflow",
-    "type": "Cloud / Deployment",
-    "desc": "React portfolio deployed as a Render static site from a GitHub repository, with an automated build and deployment workflow on the main branch.",
-    "tech": ["GitHub", "Render", "CI/CD", "React", "JavaScript"],
-    "link": "https://github.com/Sumer7121/Personal-portfolio",
-    "accent": "peach",
-    "symbol": "⌘",
-    "status": "Live"
+    id: "02",
+    name: "CrowBot",
+    subtitle: "IMVU multi-room automation bot",
+    type: "Cloud / Automation",
+    desc: "Python automation for room-specific music, games, browser workflows, and bot operations, with troubleshooting and maintainable command flows.",
+    tech: ["Python", "Playwright", "Browser Automation", "APIs", "Git"],
+    link: "https://github.com/Sumer7121/CrowBot-IMVU-Music-Bot",
+    status: "In development"
   },
   {
-    "id": "06",
-    "name": "BESS Battery Analytics",
-    "subtitle": "Energy storage performance analysis",
-    "type": "Data / Analytics",
-    "desc": "Cleaned Excel capacity-test data with Python and Pandas, calculated round-trip efficiency, and built KPI summaries and anomaly flags to help review battery performance.",
-    "tech": ["Python", "Pandas", "Excel", "Matplotlib", "Scikit-learn"],
-    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/bess-battery-analytics",
-    "status": "Case study"
+    id: "03",
+    name: "BESS Battery Analytics",
+    subtitle: "Energy storage performance analysis",
+    type: "Data / Analytics",
+    desc: "A Python analysis workflow for battery capacity and efficiency data, with data cleanup, KPI calculation, model evaluation, and reviewable outputs.",
+    tech: ["Python", "Pandas", "Scikit-learn", "Data Validation", "Analytics"],
+    link: "https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/bess-battery-analytics",
+    status: "Case study"
   },
   {
-    "id": "02",
-    "name": "Advanced RAG",
-    "subtitle": "LLM knowledge assistant",
-    "type": "AI / Machine Learning",
-    "desc": "Local document Q&A with PDF, DOCX and TXT ingestion, Sentence Transformer embeddings, FAISS retrieval, Ollama answers and retrieved source excerpts.",
-    "tech": ["Python", "FastAPI", "Streamlit", "FAISS", "Sentence Transformers", "Ollama"],
-    "link": "https://github.com/Sumer7121/Advanced-RAG-LLM-Chatbot",
-    "accent": "mint",
-    "symbol": "✳",
-    "status": "MVP"
+    id: "04",
+    name: "Advanced RAG LLM Chatbot",
+    subtitle: "Document search and question answering",
+    type: "AI / Machine Learning",
+    desc: "A document question-answering application using ingestion, embeddings, FAISS retrieval, local LLM responses, and source excerpts.",
+    tech: ["Python", "FastAPI", "FAISS", "Ollama", "RAG"],
+    link: "https://github.com/Sumer7121/Advanced-RAG-LLM-Chatbot",
+    status: "MVP"
   },
   {
-    "id": "10",
-    "name": "Glass & Sass Arts",
-    "subtitle": "Handcrafted art storefront",
-    "type": "Frontend / Design",
-    "desc": "A storefront and admin system for fused-glass, woodturning and mixed-media pieces, backed by a MongoDB API.",
-    "tech": [
-      "React",
-      "Vite",
-      "Express",
-      "MongoDB",
-      "Cloudinary",
-      "Stripe"
-    ],
-    "link": "https://github.com/Sumer7121/GlassAndSassArts",
-    "accent": "peach",
-    "symbol": "✧",
-    "status": "Preparing to launch"
-  },
-  {
-    "id": "12",
-    "name": "Recruiting Profile Explorer",
-    "subtitle": "Profile review and recruiting workflows",
-    "type": "Web / Learning",
-    "desc": "A browser-based recruiting interface with companion Python tools for authenticated profile capture and structured data workflows.",
-    "tech": [
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Python",
-      "Playwright"
-    ],
-    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/recruiter-tool",
-    "linkLabel": "View project on GitHub",
-    "accent": "blue",
-    "symbol": "⌕",
-    "status": "Prototype"
-  },
-  {
-    "id": "07",
-    "name": "MetaSigns",
-    "subtitle": "AI-assisted Unity learning",
-    "type": "AI / Machine Learning",
-    "desc": "Interactive K–12 learning with Unity, C#, concept-word selection, LLaMA integration and ASL video feedback.",
-    "tech": [
-      "Unity",
-      "C#",
-      "Python",
-      "LLaMA",
-      "FastAPI"
-    ],
-    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/metasigns-asl-aspire",
-    "accent": "violet",
-    "symbol": "✦",
-    "status": "Case study",
-    "linkLabel": "Read case study on GitHub"
-  },
-  {
-    "id": "04",
-    "name": "WebAppDev",
-    "subtitle": "Web application experiments",
-    "type": "Web / Learning",
-    "desc": "Collection of frontend exercises including a weather app, insurance calculator, forms and profile interfaces.",
-    "tech": [
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Web Apps"
-    ],
-    "link": "https://github.com/Sumer7121/WebAppDev",
-    "accent": "blue",
-    "symbol": "▦",
-    "status": "Repository"
-  },
-  {
-    "id": "05",
-    "name": "WebLab",
-    "subtitle": "Backend development lab",
-    "type": "Backend / Exploration",
-    "desc": "JavaScript application lab with application routing, configuration and middleware experiments.",
-    "tech": [
-      "JavaScript",
-      "Node.js",
-      "Middleware"
-    ],
-    "link": "https://github.com/Sumer7121/weblab",
-    "accent": "amber",
-    "symbol": "◇",
-    "status": "Repository"
+    id: "05",
+    name: "Cookbook App",
+    subtitle: "AI-assisted recipe discovery",
+    type: "AI / Machine Learning",
+    desc: "A recipe application exploring search, recipe organization, and AI-assisted cooking experiences across web and mobile.",
+    tech: ["React Native", "Expo", "JavaScript", "AI Integration", "APIs"],
+    link: "https://github.com/Sumer7121/cookbook-app",
+    status: "In development"
   }
 ];
-const experience=[
- {role:"Cloud Infrastructure Engineer",company:"Adobe",period:"Aug 2024 – Present",detail:"Work across AWS and Azure infrastructure, automating provisioning with Terraform, Ansible and Python. Support IAM and networking configurations, Kubernetes workloads, monitoring dashboards, and incident troubleshooting for cloud environments."},
- {role:"DevOps / Infrastructure Engineer",company:"IBM",period:"Jun 2020 – Dec 2022",detail:"Developed reusable infrastructure-as-code configurations and Jenkins CI/CD pipelines, administered Linux and Windows environments, automated operational tasks with Python and Shell scripts, and investigated production incidents through logs and monitoring."},
- {role:"Junior Cloud Engineer",company:"Amazon Web Services (AWS)",period:"Jun 2018 – May 2020",detail:"Supported AWS infrastructure configuration using EC2, VPC, S3 and IAM; assisted with Terraform provisioning, Docker and Kubernetes deployments, system monitoring, patching, and operational runbook documentation."}
+
+const experience = [
+  {
+    role: "Cloud Infrastructure Engineer",
+    company: "Adobe",
+    period: "Aug 2024 – Present",
+    detail: "Provision and troubleshoot AWS and Azure infrastructure with Terraform and Ansible. Support CI/CD workflows, Kubernetes deployments, Python automation, cloud access and networking, monitoring, and AI-assisted engineering workflows."
+  },
+  {
+    role: "DevOps / Infrastructure Engineer",
+    company: "IBM",
+    period: "Jun 2020 – Dec 2022",
+    detail: "Built reusable infrastructure automation and Jenkins delivery workflows; administered Linux and Windows environments, scripted operational tasks, and investigated deployment and production incidents using logs and monitoring."
+  },
+  {
+    role: "Junior Cloud Engineer",
+    company: "Amazon Web Services (AWS)",
+    period: "Jun 2018 – May 2020",
+    detail: "Supported AWS environments using EC2, VPC, S3, and IAM; assisted with Terraform provisioning, container deployments, Linux operations, CloudWatch monitoring, and documented troubleshooting and recovery procedures."
+  }
 ];
-const categories=["All","Cloud","AI","Data","Web"];
-const category=p=>categories.find(name=>p.type.startsWith(`${name} /`)) ?? "Web";
-function App(){
- const [filter,setFilter]=useState("All");
- const shown=projects.filter(p=>filter==="All"||category(p)===filter);
- return <div className="site" id="home">
-  <header className="header"><a className="wordmark" href="#home">Sumer Khan<span>Tampa, Florida</span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="mailto:sumerkhan95@gmail.com">Contact</a></nav></header>
-  <main>
-   <section className="intro"><p className="eyebrow">Cloud Infrastructure &amp; DevOps Engineer</p><h1>Mohammed<br/>Sumer Khan<span>.</span></h1><div className="intro-bottom"><p>I build and operate cloud infrastructure on AWS and Azure, automate deployments with Terraform and CI/CD pipelines, and improve reliability through Kubernetes operations, observability, scripting and security-focused troubleshooting.</p><a className="text-link" href="#work">Explore cloud &amp; automation projects <span aria-hidden="true">↓</span></a></div></section>
-   <section className="work section" id="work"><div className="section-head"><h2>Selected work</h2><div className="filters" role="group" aria-label="Filter projects">{categories.map(c=><button key={c} type="button" aria-pressed={filter===c} onClick={()=>setFilter(c)}>{c}</button>)}</div></div>
-   <div className="projects">{shown.map(p=><a className="project" href={p.link} key={p.id} target="_blank" rel="noopener noreferrer" aria-label={p.name+" — "+(p.status==="Case study"?"GitHub case study":"GitHub repository")}><div className="project-top"><span>{category(p)} / {p.status==="Case study"?"Case study":"Code"}</span><span aria-hidden="true">↗</span></div><h3>{p.name}</h3><p>{p.desc}</p><div className="tech">{p.tech.slice(0,5).join(" · ")}</div><span className="source-label">{p.status==="Case study"?"Read case study on GitHub":"View project on GitHub"}</span></a>)}</div>
-   <aside className="current-project"><span>Also building</span><div><h3>Infrastructure Automation &amp; AI Agents</h3><p>I experiment with AI agents and Python automation for operational tasks, API integrations, incident investigation and cloud infrastructure workflows.</p></div></aside></section>
-   <section className="section" id="experience"><div className="section-head"><h2>Experience</h2></div><div className="experience">{experience.map(e=><article className="experience-row" key={e.company}><div><h3>{e.company}</h3><span>{e.period}</span></div><div><h4>{e.role}</h4><p>{e.detail}</p></div></article>)}</div></section>
-   <section className="section about" id="about"><h2>About</h2><div><p>I’m a Cloud Infrastructure and DevOps engineer working across AWS, Azure, infrastructure as code, CI/CD and production operations. My focus is repeatable provisioning, secure access, reliable deployments, practical observability, and resolving infrastructure incidents with clear documentation and automation.</p><dl><div><dt>Cloud</dt><dd>AWS EC2, S3, VPC, IAM, EKS, Lambda, CloudWatch; Azure VMs, VNETs, Storage, Azure Monitor</dd></div><div><dt>DevOps</dt><dd>Terraform, Ansible, CloudFormation, Jenkins, GitHub Actions, GitLab CI, Docker, Kubernetes, Helm</dd></div><div><dt>Operations</dt><dd>Linux, Python, Bash, PowerShell, networking, IAM, Prometheus, Grafana, Datadog, ELK, incident RCA</dd></div><div><dt>AI &amp; Data</dt><dd>Python, SQL, RAG, AI agents, FastAPI, Pandas and cloud-integrated automation</dd></div></dl></div></section>
-  </main><footer><div><p>Get in touch</p><a href="mailto:sumerkhan95@gmail.com">sumerkhan95@gmail.com</a></div><div className="footer-links"><a className="text-link" href="https://www.linkedin.com/in/sumer-k" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a> <a className="text-link" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><span>© {new Date().getFullYear()} Mohammed Sumer Khan</span></footer>
- </div>;
+
+const categories = ["All", "Cloud", "AI", "Data"];
+const category = project => categories.find(name => project.type.startsWith(`${name} /`)) ?? "Cloud";
+
+function App() {
+  const [filter, setFilter] = useState("All");
+  const shown = projects.filter(project => filter === "All" || category(project) === filter);
+
+  return <div className="site" id="home">
+    <header className="header">
+      <a className="wordmark" href="#home">Sumer Khan<span>Tampa, Florida</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a>
+        <a href="mailto:sumerkhan95@gmail.com">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <section className="intro">
+        <p className="eyebrow">Cloud DevOps · Data Engineering · AI</p>
+        <h1>Mohammed<br/>Sumer Khan<span>.</span></h1>
+        <div className="intro-bottom">
+          <p>I build and support cloud infrastructure and delivery pipelines across AWS and Azure. My work brings together infrastructure as code, CI/CD, Kubernetes, production troubleshooting, data engineering, and practical AI automation.</p>
+          <a className="text-link" href="#work">Explore projects <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+      <section className="work section" id="work">
+        <div className="section-head">
+          <h2>Selected work</h2>
+          <div className="filters" role="group" aria-label="Filter projects">
+            {categories.map(item => <button key={item} type="button" aria-pressed={filter === item} onClick={() => setFilter(item)}>{item}</button>)}
+          </div>
+        </div>
+        <div className="projects">
+          {shown.map(project => <a className="project" href={project.link} key={project.id} target="_blank" rel="noopener noreferrer" aria-label={project.name + " — GitHub project"}>
+            <div className="project-top"><span>{category(project)} / {project.status}</span><span aria-hidden="true">↗</span></div>
+            <h3>{project.name}</h3><p>{project.desc}</p>
+            <div className="tech">{project.tech.slice(0, 5).join(" · ")}</div>
+            <span className="source-label">View project on GitHub</span>
+          </a>)}
+        </div>
+        <aside className="current-project">
+          <span>Current focus</span>
+          <div><h3>Reliable cloud platforms and AI automation</h3>
+            <p>Applying automation and AI tools to infrastructure and data workflows, with attention to access control, observability, failure handling, and clear operational steps.</p>
+          </div>
+        </aside>
+      </section>
+      <section className="section" id="experience">
+        <div className="section-head"><h2>Experience</h2></div>
+        <div className="experience">
+          {experience.map(item => <article className="experience-row" key={item.company}>
+            <div><h3>{item.company}</h3><span>{item.period}</span></div>
+            <div><h4>{item.role}</h4><p>{item.detail}</p></div>
+          </article>)}
+        </div>
+      </section>
+      <section className="section about" id="about">
+        <h2>Cloud, DevOps, Data &amp; AI</h2>
+        <div>
+          <p>I focus on repeatable infrastructure, secure cloud operations, reliable delivery, and production troubleshooting. I also work with data pipelines and AI-enabled applications, connecting practical implementation details with observability and clear recovery steps.</p>
+          <dl>
+            <div><dt>AWS &amp; Azure</dt><dd>AWS EC2, S3, VPC, IAM, Lambda, Glue, EMR, Redshift, Athena, Step Functions, EventBridge, SQS, RDS, EKS, CloudWatch; Azure VMs, VNETs, Storage, Azure Monitor</dd></div>
+            <div><dt>DevOps &amp; Platform</dt><dd>Terraform, CloudFormation, Ansible, Docker, Kubernetes, EKS, Helm, GitOps, Jenkins, GitHub Actions, GitLab CI, Azure DevOps, Linux, Bash, Python</dd></div>
+            <div><dt>Data Engineering</dt><dd>ETL/ELT, AWS Glue, Lambda, S3 data lakes, EMR, Spark, PySpark, Redshift, Athena, Airflow, Kafka, Databricks, Snowflake, dbt, SQL, data validation</dd></div>
+            <div><dt>Observability &amp; Reliability</dt><dd>CloudWatch, Prometheus, Grafana, OpenTelemetry, ELK, Datadog, alerting, log analysis, incident response, root-cause analysis, runbooks</dd></div>
+            <div><dt>AI &amp; APIs</dt><dd>Amazon Bedrock, Azure OpenAI, Python, FastAPI, LangChain, LangGraph, RAG, AI agents, REST APIs, model and data workflow automation</dd></div>
+          </dl>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div><p>Get in touch</p><a href="mailto:sumerkhan95@gmail.com">sumerkhan95@gmail.com</a></div>
+      <div className="footer-links">
+        <a className="text-link" href="https://www.linkedin.com/in/sumer-md/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a className="text-link" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+      <span>© {new Date().getFullYear()} Mohammed Sumer Khan</span>
+    </footer>
+  </div>;
 }
+
 export default App;
