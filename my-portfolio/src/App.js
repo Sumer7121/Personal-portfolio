@@ -2,6 +2,52 @@ import React, { useState } from "react";
 import "./App.css";
 const projects=[
   {
+    "id": "01",
+    "name": "CrowBot",
+    "subtitle": "Cloud-hosted automation and streaming",
+    "type": "Cloud / Automation",
+    "desc": "Python-based multi-room music automation with browser workflows, Docker-based cloud services, streaming integrations and operational troubleshooting.",
+    "tech": ["Python", "Docker", "Render", "Playwright", "Cloud deployment"],
+    "link": "https://github.com/Sumer7121/CrowBot-IMVU-Music-Bot",
+    "accent": "violet",
+    "symbol": "◉",
+    "status": "In development"
+  },
+  {
+    "id": "03",
+    "name": "Portfolio CI/CD & Cloud Hosting",
+    "subtitle": "GitHub to Render deployment workflow",
+    "type": "Cloud / Deployment",
+    "desc": "React portfolio deployed as a Render static site from a GitHub repository, with an automated build and deployment workflow on the main branch.",
+    "tech": ["GitHub", "Render", "CI/CD", "React", "JavaScript"],
+    "link": "https://github.com/Sumer7121/Personal-portfolio",
+    "accent": "peach",
+    "symbol": "⌘",
+    "status": "Live"
+  },
+  {
+    "id": "06",
+    "name": "BESS Battery Analytics",
+    "subtitle": "Energy storage performance analysis",
+    "type": "Data / Analytics",
+    "desc": "Cleaned Excel capacity-test data with Python and Pandas, calculated round-trip efficiency, and built KPI summaries and anomaly flags to help review battery performance.",
+    "tech": ["Python", "Pandas", "Excel", "Matplotlib", "Scikit-learn"],
+    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/bess-battery-analytics",
+    "status": "Case study"
+  },
+  {
+    "id": "02",
+    "name": "Advanced RAG",
+    "subtitle": "LLM knowledge assistant",
+    "type": "AI / Machine Learning",
+    "desc": "Local document Q&A with PDF, DOCX and TXT ingestion, Sentence Transformer embeddings, FAISS retrieval, Ollama answers and retrieved source excerpts.",
+    "tech": ["Python", "FastAPI", "Streamlit", "FAISS", "Sentence Transformers", "Ollama"],
+    "link": "https://github.com/Sumer7121/Advanced-RAG-LLM-Chatbot",
+    "accent": "mint",
+    "symbol": "✳",
+    "status": "MVP"
+  },
+  {
     "id": "10",
     "name": "Glass & Sass Arts",
     "subtitle": "Handcrafted art storefront",
