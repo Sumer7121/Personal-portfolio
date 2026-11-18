@@ -2,53 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 const projects=[
   {
-    "id": "06",
-    "name": "BESS Battery Analytics",
-    "subtitle": "Energy storage performance analysis",
-    "type": "Data / Analytics",
-    "desc": "Cleaned Excel capacity-test data with Python and Pandas, calculated round-trip efficiency, and built KPI summaries and anomaly flags to help review battery performance.",
-    "tech": ["Python", "Pandas", "Excel", "Matplotlib", "Scikit-learn"],
-    "link": "https://github.com/Sumer7121/Personal-portfolio/tree/main/projects/bess-battery-analytics",
-    "status": "Case study"
-  },
-  {
-    "id": "02",
-    "name": "Advanced RAG",
-    "subtitle": "LLM knowledge assistant",
-    "type": "AI / Machine Learning",
-    "desc": "Local document Q&A with PDF, DOCX and TXT ingestion, Sentence Transformer embeddings, FAISS retrieval, Ollama answers and retrieved source excerpts.",
-    "tech": [
-      "Python",
-      "FastAPI",
-      "Streamlit",
-      "FAISS",
-      "Sentence Transformers",
-      "Ollama"
-    ],
-    "link": "https://github.com/Sumer7121/Advanced-RAG-LLM-Chatbot",
-    "accent": "mint",
-    "symbol": "✳",
-    "status": "MVP"
-  },
-  {
-    "id": "01",
-    "name": "CrowBot",
-    "subtitle": "IMVU cloud music platform",
-    "type": "Cloud / Automation",
-    "desc": "Multi-room music bot architecture with independent queues, radio streaming, browser automation and cloud deployment workflows.",
-    "tech": [
-      "Python",
-      "Playwright",
-      "Docker",
-      "Render",
-      "Node.js"
-    ],
-    "link": "https://github.com/Sumer7121/CrowBot-IMVU-Music-Bot",
-    "accent": "violet",
-    "symbol": "◉",
-    "status": "In development"
-  },
-  {
     "id": "10",
     "name": "Glass & Sass Arts",
     "subtitle": "Handcrafted art storefront",
@@ -106,24 +59,6 @@ const projects=[
     "linkLabel": "Read case study on GitHub"
   },
   {
-    "id": "03",
-    "name": "Personal Portfolio",
-    "subtitle": "Developer experience",
-    "type": "Frontend / Design",
-    "desc": "Responsive portfolio with a curated project archive, modern interactions and continuous deployment from GitHub.",
-    "tech": [
-      "React",
-      "JavaScript",
-      "CSS",
-      "Render",
-      "GitHub"
-    ],
-    "link": "https://github.com/Sumer7121/Personal-portfolio",
-    "accent": "peach",
-    "symbol": "⌘",
-    "status": "Live"
-  },
-  {
     "id": "04",
     "name": "WebAppDev",
     "subtitle": "Web application experiments",
@@ -158,11 +93,11 @@ const projects=[
   }
 ];
 const experience=[
- {role:"Digital Marketing Analyst",company:"Adobe",period:"Aug 2024 – Present",detail:"Combine campaign and web acquisition data with SQL and Python. Build dashboards that compare spend, conversions, CPA, and ROAS across channels, and investigate reporting discrepancies with marketing teams."},
- {role:"Marketing Data Analyst",company:"IBM",period:"Jun 2020 – Dec 2022",detail:"Standardized KPI definitions and built recurring reports using SQL, Python, and Excel. Used segmentation and cohort analysis to identify where customers dropped off between acquisition and conversion."},
- {role:"Junior Marketing Analyst",company:"Amazon Web Services (AWS)",period:"Jun 2018 – May 2020",detail:"Used Excel and SQL to compare paid and organic acquisition. Checked UTM tags and investigated missing or duplicate records before preparing website performance reports."}
+ {role:"Cloud Infrastructure Engineer",company:"Adobe",period:"Aug 2024 – Present",detail:"Work across AWS and Azure infrastructure, automating provisioning with Terraform, Ansible and Python. Support IAM and networking configurations, Kubernetes workloads, monitoring dashboards, and incident troubleshooting for cloud environments."},
+ {role:"DevOps / Infrastructure Engineer",company:"IBM",period:"Jun 2020 – Dec 2022",detail:"Developed reusable infrastructure-as-code configurations and Jenkins CI/CD pipelines, administered Linux and Windows environments, automated operational tasks with Python and Shell scripts, and investigated production incidents through logs and monitoring."},
+ {role:"Junior Cloud Engineer",company:"Amazon Web Services (AWS)",period:"Jun 2018 – May 2020",detail:"Supported AWS infrastructure configuration using EC2, VPC, S3 and IAM; assisted with Terraform provisioning, Docker and Kubernetes deployments, system monitoring, patching, and operational runbook documentation."}
 ];
-const categories=["All","Data","AI","Cloud","Web"];
+const categories=["All","Cloud","AI","Data","Web"];
 const category=p=>categories.find(name=>p.type.startsWith(`${name} /`)) ?? "Web";
 function App(){
  const [filter,setFilter]=useState("All");
@@ -170,12 +105,12 @@ function App(){
  return <div className="site" id="home">
   <header className="header"><a className="wordmark" href="#home">Sumer Khan<span>Tampa, Florida</span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="mailto:sumerkhan95@gmail.com">Contact</a></nav></header>
   <main>
-   <section className="intro"><p className="eyebrow">Digital Marketing &amp; Data Analyst</p><h1>Mohammed<br/>Sumer Khan<span>.</span></h1><div className="intro-bottom"><p>I analyze marketing performance with SQL, Python, Power BI and Tableau—turning acquisition, attribution and conversion-funnel data into reliable dashboards, automated KPI reporting and actionable insights.</p><a className="text-link" href="#work">View analytics work <span aria-hidden="true">↓</span></a></div></section>
+   <section className="intro"><p className="eyebrow">Cloud Infrastructure &amp; DevOps Engineer</p><h1>Mohammed<br/>Sumer Khan<span>.</span></h1><div className="intro-bottom"><p>I build and operate cloud infrastructure on AWS and Azure, automate deployments with Terraform and CI/CD pipelines, and improve reliability through Kubernetes operations, observability, scripting and security-focused troubleshooting.</p><a className="text-link" href="#work">Explore cloud &amp; automation projects <span aria-hidden="true">↓</span></a></div></section>
    <section className="work section" id="work"><div className="section-head"><h2>Selected work</h2><div className="filters" role="group" aria-label="Filter projects">{categories.map(c=><button key={c} type="button" aria-pressed={filter===c} onClick={()=>setFilter(c)}>{c}</button>)}</div></div>
    <div className="projects">{shown.map(p=><a className="project" href={p.link} key={p.id} target="_blank" rel="noopener noreferrer" aria-label={p.name+" — "+(p.status==="Case study"?"GitHub case study":"GitHub repository")}><div className="project-top"><span>{category(p)} / {p.status==="Case study"?"Case study":"Code"}</span><span aria-hidden="true">↗</span></div><h3>{p.name}</h3><p>{p.desc}</p><div className="tech">{p.tech.slice(0,5).join(" · ")}</div><span className="source-label">{p.status==="Case study"?"Read case study on GitHub":"View project on GitHub"}</span></a>)}</div>
-   <aside className="current-project"><span>Also building</span><div><h3>AI Agents & Voice Agents</h3><p>As a hobby, I design and experiment with tool-using AI agents, conversational workflows and voice agents that can understand requests, call APIs and automate useful tasks.</p></div></aside></section>
+   <aside className="current-project"><span>Also building</span><div><h3>Infrastructure Automation &amp; AI Agents</h3><p>I experiment with AI agents and Python automation for operational tasks, API integrations, incident investigation and cloud infrastructure workflows.</p></div></aside></section>
    <section className="section" id="experience"><div className="section-head"><h2>Experience</h2></div><div className="experience">{experience.map(e=><article className="experience-row" key={e.company}><div><h3>{e.company}</h3><span>{e.period}</span></div><div><h4>{e.role}</h4><p>{e.detail}</p></div></article>)}</div></section>
-   <section className="section about" id="about"><h2>About</h2><div><p>I’m based in Tampa and work across digital marketing analytics, customer segmentation, campaign reporting and data-quality validation. My approach connects marketing activity to measurable outcomes through SQL and Python analysis, clear KPI definitions, reusable dashboards and stakeholder-focused recommendations.</p><dl><div><dt>Analysis</dt><dd>SQL, Python, Pandas, advanced Excel, segmentation, cohort and funnel analysis</dd></div><div><dt>Reporting</dt><dd>Power BI, Tableau, KPI dashboards, recurring reporting, data validation</dd></div><div><dt>Measurement</dt><dd>Attribution, UTM tracking, CAC, CPA, ROAS, conversion rates, A/B test analysis</dd></div><div><dt>AI Hobby</dt><dd>AI agents, voice agents, RAG, LangChain, FastAPI, Ollama</dd></div></dl></div></section>
+   <section className="section about" id="about"><h2>About</h2><div><p>I’m a Cloud Infrastructure and DevOps engineer working across AWS, Azure, infrastructure as code, CI/CD and production operations. My focus is repeatable provisioning, secure access, reliable deployments, practical observability, and resolving infrastructure incidents with clear documentation and automation.</p><dl><div><dt>Cloud</dt><dd>AWS EC2, S3, VPC, IAM, EKS, Lambda, CloudWatch; Azure VMs, VNETs, Storage, Azure Monitor</dd></div><div><dt>DevOps</dt><dd>Terraform, Ansible, CloudFormation, Jenkins, GitHub Actions, GitLab CI, Docker, Kubernetes, Helm</dd></div><div><dt>Operations</dt><dd>Linux, Python, Bash, PowerShell, networking, IAM, Prometheus, Grafana, Datadog, ELK, incident RCA</dd></div><div><dt>AI &amp; Data</dt><dd>Python, SQL, RAG, AI agents, FastAPI, Pandas and cloud-integrated automation</dd></div></dl></div></section>
   </main><footer><div><p>Get in touch</p><a href="mailto:sumerkhan95@gmail.com">sumerkhan95@gmail.com</a></div><div className="footer-links"><a className="text-link" href="https://www.linkedin.com/in/sumer-k" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a> <a className="text-link" href="https://github.com/Sumer7121" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><span>© {new Date().getFullYear()} Mohammed Sumer Khan</span></footer>
  </div>;
 }
